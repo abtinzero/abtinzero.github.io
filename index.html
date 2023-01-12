@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <title>Abtin Saadat Portfolio</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+  
 </head>
+
 <body>
+
   <header>
     <h1>Abtin Saadat</h1>
     <nav>
@@ -22,26 +29,38 @@
       <p>Add a brief bio and any relevant information about your experience as a full stack developer here.</p>
     </section>
     <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>Node.js</li>
-        <li>Typescript</li>
-        <li>Angular</li>
-        <li>Postgresql</li>
-      </ul>
+      <div class="resume-section-content">
+        <h2 class="mb-5">Skills</h2>
+        <div class="subheading mb-3">Programming Languages & Tools</div>
+        <ul class="list-inline dev-icons">
+          <li class="list-inline-item"><i class="fab fa-html5"></i></li>
+          <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
+          <li class="list-inline-item"><i class="fab fa-java"></i></li>
+          <li class="list-inline-item"><i class="fab fa-python"></i></li>
+          <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
+          <li class="list-inline-item"><i class="fab fa-angular"></i></li>
+          <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
+          <li class="list-inline-item"><i class="fab fa-npm"></i></li>
+        </ul>
     </section>
     <section id="projects">
       <h2>Projects</h2>
       <h3>Telegram bot using Python</h3>
       <p>Made a telegram bot using python telegram bot API. It also uses API to transcribe text from audio.</p>
       <h3>Videogames using Godot Engine</h3>
-      <p>Being passionate in videogames, I also like making them as they are quite the fun challenge to solve. I'm making videogames using godot engine and Blender for models.</p>
+      <iframe src="https://itch.io/embed/1836979?linkback=true&amp;dark=true" width="552" height="167" frameborder="0"><a href="https://abtin0.itch.io/the-labyrinth-of-the-stalker">The Labyrinth of the Stalker by abtin0</a></iframe>
+      <p>Being passionate in videogames, I also like making them as they are quite the fun challenge to solve. I'm
+        making videogames using godot engine and Blender for models.</p>
     </section>
     <section id="contact">
+
       <h2>Contact</h2>
+      <div class="social-icons">
+        <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-icon" href="#!"><i class="fab fa-github"></i></a>
+        <a class="social-icon" href="#!"><i class="fab fa-twitter"></i></a>
+        <a class="social-icon" href="#!"><i class="fab fa-facebook-f"></i></a>
+      </div>
       <p>Email: abtinsaadat@gmail.com</p>
     </section>
   </main>
@@ -49,4 +68,5 @@
     <p>Copyright 2022</p>
   </footer>
 </body>
+
 </html>
