@@ -4,18 +4,24 @@
 <head>
   <title>Abtin Saadat Portfolio</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" type="text/css" href="background_styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-  <link rel="icon" href="./img/favicon.ico"/> 
-  
+  <script src="script.js" defer></script>
+  <link rel="icon" href="./img/favicon.ico" />
+
 </head>
 
 <body>
-
-  <header>
-    <h1>Abtin Saadat</h1>
-    <nav>
+  <nav>
+    <div class="brand-title">Abtin Saadat</div>
+    <a href="#" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -23,10 +29,9 @@
         <li><a href="#education">Education</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
-
       </ul>
-    </nav>
-  </header>
+    </div>
+  </nav>
   <main>
     <section id="about">
       <h2>About Me</h2>
@@ -52,10 +57,10 @@
     </section>
     <section id="experience">
       <h2>Experience</h2>
-            <h3 class="mb-0">FullStack Developer Internship</h3>
-            <div class="subheading mb-3">Mysond SRL</div>
-            <p>Developed solutions both frontend and backend</p>
-    </div>
+      <h3 class="mb-0">FullStack Developer Internship</h3>
+      <div class="subheading mb-3">Mysond SRL</div>
+      <p>Developed solutions both frontend and backend</p>
+      </div>
     </section>
     <section id="education">
       <h2>Education</h2>
@@ -66,7 +71,9 @@
       <h3>Telegram bot using Python</h3>
       <p>Made a telegram bot using python telegram bot API. It also uses API to transcribe text from audio.</p>
       <h3>Videogames using Godot Engine</h3>
-      <iframe src="https://itch.io/embed/1836979?linkback=true&amp;dark=true" width="552" height="167" frameborder="0"><a href="https://abtin0.itch.io/the-labyrinth-of-the-stalker">The Labyrinth of the Stalker by abtin0</a></iframe>
+      <iframe src="https://itch.io/embed/1836979?linkback=true&amp;dark=true" width="552" height="167"
+        frameborder="0"><a href="https://abtin0.itch.io/the-labyrinth-of-the-stalker">The Labyrinth of the Stalker by
+          abtin0</a></iframe>
       <p>Being passionate in videogames, I also like making them as they are quite the fun challenge to solve. I'm
         making videogames using godot engine and Blender for models.</p>
     </section>
