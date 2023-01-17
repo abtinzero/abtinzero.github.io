@@ -141,3 +141,7 @@ main {
 .social-icons .social-icon:hover {
   background-color: #bd5d38;
 }
+
+footer{
+  text-align: center;
+}
