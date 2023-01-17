@@ -15,6 +15,9 @@ body {
   align-items: center;
   background-color: #333;
   color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .brand-title {
