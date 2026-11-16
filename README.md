@@ -11,7 +11,8 @@ npm run dev
 
 ## Edit content
 
-- `src/data/games.js`: games (the one with `spotlight: true` gets the big showcase)
+- `src/data/games.js`: games, in display order. The first one is also shown in the hero, playing its trailer.
+  `stamp` is the orange film date in the corner of each print, and `caption` is the handwritten note under it.
 - `src/data/profile.js`: name, bio, stats, links
 - `public/games/<game>/`: cover art and screenshots (WebP, ~1280px wide)
 

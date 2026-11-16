@@ -1,163 +1,172 @@
 <script setup>
-import PixelField from './PixelField.vue'
+import PhotoPrint from './PhotoPrint.vue'
 import { profile } from '../data/profile'
-import { games } from '../data/games'
+import { games, asset } from '../data/games'
 
-const engines = [...new Set(games.flatMap((g) => [g.engine, ...(g.tools || [])]))]
-const spotlight = games.find((g) => g.spotlight)
+const [lead, second] = games
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 </script>
 
 <template>
-  <section id="top" class="hero">
-    <PixelField class="hero__bg" />
-    <div class="container hero__inner">
-      <a v-if="spotlight" href="#spotlight" class="hero__news">
-        <span class="hero__news-tag pixel">NEW</span>
-        🛸 {{ spotlight.title }} is out now on Steam <span aria-hidden="true">→</span>
-      </a>
-      <p class="hero__hello pixel">
-        <span class="blink">▶</span> PLAYER ONE: {{ profile.name.toUpperCase() }}
-      </p>
-      <h1 class="hero__title">
-        I build <span class="hl hl--pink">games</span><br />
-        that feel <span class="hl hl--yellow">good</span> to play.
+  <header class="top wrap">
+    <a href="#" class="top__name">{{ profile.fullName }}</a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="#games">Games</a>
+      <a href="#about">About</a>
+      <a href="https://abtin0.itch.io/" target="_blank" rel="noopener">itch.io</a>
+    </nav>
+  </header>
+
+  <section class="hero wrap">
+    <div class="hero__text">
+      <h1 class="hero__name">
+        <span>Abtin</span>
+        <span>Saadat</span>
       </h1>
-      <p class="hero__tagline">{{ profile.tagline }}</p>
-
+      <p class="hero__intro">{{ profile.intro }}</p>
       <div class="hero__actions">
-        <a href="#spotlight" class="btn">Press start</a>
-        <a href="#about" class="btn btn--ghost">About me</a>
+        <a v-if="lead.links.steam" :href="lead.links.steam" target="_blank" rel="noopener" class="button">
+          Get it on Steam, {{ lead.price }}
+        </a>
+        <a href="#games">See all my games</a>
       </div>
-
-      <ul class="hero__engines" aria-label="Engines I use">
-        <li v-for="e in engines" :key="e">{{ e }}</li>
-      </ul>
     </div>
-    <a href="#spotlight" class="hero__scroll pixel" aria-label="Scroll to games">▼</a>
+
+    <div class="hero__prints">
+      <div v-if="second" class="drop drop--back">
+        <PhotoPrint :src="asset(second.cover)" :alt="`${second.title} cover`" ratio="5 / 4" :tilt="7" />
+      </div>
+      <div class="drop drop--front">
+        <PhotoPrint :caption="`${lead.title}, ${lead.caption}`" :stamp="lead.stamp" :tilt="-2.5">
+          <video
+            v-if="lead.trailer"
+            :src="lead.trailer"
+            :poster="asset(lead.cover)"
+            :autoplay="!reduced"
+            :controls="reduced"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            :aria-label="`${lead.title} gameplay trailer`"
+          ></video>
+          <img v-else :src="asset(lead.cover)" :alt="lead.title" />
+        </PhotoPrint>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped>
-.hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
+.top {
   display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: 100px 0 80px;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 26px;
+  padding-bottom: 26px;
 }
-.hero__bg {
-  position: absolute;
-  inset: 0;
-}
-.hero__inner {
-  position: relative;
-}
-.hero__news {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 28px;
-  padding: 6px 14px 6px 6px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(28, 24, 54, 0.75);
+.top a {
   color: var(--text);
   text-decoration: none;
-  font-size: 15px;
-  transition: border-color 0.15s, transform 0.15s;
 }
-.hero__news:hover {
-  border-color: var(--pink);
-  transform: translateY(-1px);
+.top a:hover {
+  color: var(--saucer);
 }
-.hero__news-tag {
-  font-size: 9px;
-  padding: 6px 8px;
-  border-radius: 999px;
-  background: var(--pink);
-  color: #000;
+.top__name {
+  font-weight: 600;
 }
-.hero__hello {
-  font-size: 12px;
-  color: var(--mint);
-  margin: 0 0 24px;
+.top__nav {
+  display: flex;
+  gap: 26px;
 }
-.blink {
-  animation: blink 1s steps(1) infinite;
+
+.hero {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 56px;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 120px;
 }
-@keyframes blink {
-  50% { opacity: 0; }
+.hero__name {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(88px, 13vw, 196px);
+  font-weight: 130;
+  font-variation-settings: 'wdth' 62;
+  line-height: 0.84;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin-bottom: 36px;
 }
-.hero__title {
-  font-size: clamp(44px, 8.5vw, 104px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-weight: 700;
-  margin: 0 0 28px;
-}
-.hl {
-  position: relative;
-  display: inline-block;
-  padding: 0 0.12em;
-  color: #000;
-  transform: rotate(-2deg);
-  border: 4px solid #000;
-  box-shadow: var(--shadow-pop);
-  border-radius: 10px;
-}
-.hl--pink {
-  background: var(--pink);
-}
-.hl--yellow {
-  background: var(--yellow);
-  transform: rotate(1.5deg);
-}
-.hero__tagline {
-  font-size: clamp(17px, 2vw, 20px);
-  color: var(--muted);
-  max-width: 54ch;
-  margin: 0 0 36px;
+.hero__intro {
+  max-width: 36ch;
+  font-size: 20px;
+  margin: 0 0 32px;
 }
 .hero__actions {
   display: flex;
-  gap: 14px;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
 }
-.hero__engines {
-  list-style: none;
-  padding: 0;
-  margin: 44px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+
+.hero__prints {
+  position: relative;
+  padding: 40px 0 0 0;
 }
-.hero__engines li {
-  font-family: var(--font-pixel);
-  font-size: 10px;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--muted);
-  background: rgba(28, 24, 54, 0.6);
-}
-.hero__scroll {
+.drop--back {
   position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-decoration: none;
-  color: var(--muted);
-  font-size: 14px;
-  animation: bob 1.4s ease-in-out infinite;
+  top: -10px;
+  right: -12px;
+  width: 38%;
 }
-@media (max-width: 640px) {
-  .hero__scroll {
-    display: none;
+.drop--front {
+  position: relative;
+  width: 92%;
+}
+
+/* the one load moment: prints drop onto the table */
+.drop {
+  animation: drop 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+.drop--back {
+  animation-delay: 0.05s;
+}
+.drop--front {
+  animation-delay: 0.22s;
+}
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-36px) rotate(6deg) scale(1.04);
   }
 }
-@keyframes bob {
-  50% { transform: translate(-50%, 8px); }
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-top: 24px;
+    padding-bottom: 80px;
+  }
+  .drop--front {
+    width: 100%;
+  }
+  .drop--back {
+    display: none;
+  }
+  .hero__prints {
+    padding-top: 0;
+  }
+}
+@media (max-width: 480px) {
+  .top__nav {
+    gap: 16px;
+  }
+  .top__name {
+    display: none;
+  }
 }
 </style>

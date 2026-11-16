@@ -9,19 +9,21 @@
 //   year        number
 //   engine      e.g. 'Godot', 'Unity'
 //   tools       other tools used (optional)
-//   tags        genres / features (used for filtering once there are 5+ games)
+//   tags        genres / features
 //   role        what YOU did on it
 //   team        studio / collaborators (optional)
 //   platforms   e.g. ['Web', 'Windows']
 //   jam         optional { name, url }
 //   status      'Released' | 'Jam' | 'In development' | 'Prototype'
-//   color       accent color
+//   stamp       film date-stamp shown on the print, e.g. "'24 6 26"
+//   caption     handwritten note on the print
 //   cover       image path relative to /public, e.g. 'games/my-game/cover.webp'
+//   heroImage   optional wider image used in the hero instead of the cover
 //   screenshots array of image paths relative to /public
 //   youtube     optional YouTube video id (shown in the detail view)
 //   trailer     optional direct .mp4 URL (used instead of YouTube if set)
 //   links       { steam, play, itch, source, devlog } — any can be omitted
-//   spotlight   true = gets the big showcase section (use on one game)
+//   The first game in the list is also shown in the hero.
 //
 // Image paths have NO leading slash so the site works on any GitHub Pages URL.
 // ─────────────────────────────────────────────────────────────
@@ -42,8 +44,9 @@ export const games = [
     platforms: ['Windows', 'Linux'],
     status: 'Released',
     released: '26 Jun 2024',
+    stamp: "'24 6 26",
+    caption: 'out on Steam!',
     price: '€4.99',
-    color: '#ff5fa2',
     cover: 'games/ufo/cover.webp',
     screenshots: [
       'games/ufo/shot-1.webp',
@@ -59,7 +62,6 @@ export const games = [
       steam: 'https://store.steampowered.com/app/2723820/UFO_Sightings_Simulator/',
       itch: 'https://galerastudios.itch.io/ufo-sightings-simulator',
     },
-    spotlight: true,
   },
   {
     id: 'unstable-space-raiding',
@@ -78,7 +80,8 @@ export const games = [
     platforms: ['Web', 'Windows'],
     jam: { name: 'GMTK Game Jam 2025', url: 'https://itch.io/jam/gmtk-2025/rate/3775492' },
     status: 'Jam',
-    color: '#c86bff',
+    stamp: "'25",
+    caption: 'GMTK Game Jam 2025',
     cover: 'games/usr/cover.webp',
     screenshots: [
       'games/usr/shot-1.webp',
@@ -107,7 +110,8 @@ export const games = [
     platforms: ['Web', 'Windows', 'Linux'],
     jam: { name: 'Secret Santa Jam 2022', url: 'https://itch.io/jam/secret-santa-2022/rate/1836979' },
     status: 'Jam',
-    color: '#ffb84d',
+    stamp: "'22",
+    caption: 'Secret Santa Jam 2022',
     cover: 'games/lab/cover.webp',
     screenshots: ['games/lab/shot-1.webp', 'games/lab/shot-2.webp'],
     youtube: 'ZtQRPBlKcCE',

@@ -1,50 +1,43 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import NavBar from './components/NavBar.vue'
 import HeroSection from './components/HeroSection.vue'
-import SpotlightSection from './components/SpotlightSection.vue'
-import GamesSection from './components/GamesSection.vue'
-import WebTeaser from './components/WebTeaser.vue'
+import GameEntry from './components/GameEntry.vue'
 import AboutSection from './components/AboutSection.vue'
-import GameModal from './components/GameModal.vue'
-import ToastMessage from './components/ToastMessage.vue'
-
-const activeGame = ref(null)
-const toast = ref('')
-
-// ↑ ↑ ↓ ↓ ← → ← → B A toggles CRT mode
-const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
-let progress = 0
-
-function onKey(e) {
-  const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
-  progress = key === KONAMI[progress] ? progress + 1 : key === KONAMI[0] ? 1 : 0
-  if (progress === KONAMI.length) {
-    progress = 0
-    const on = document.body.classList.toggle('crt')
-    showToast(on ? 'CHEAT ACTIVATED: CRT MODE' : 'CRT MODE OFF')
-  }
-}
-
-function showToast(msg) {
-  toast.value = msg
-  clearTimeout(showToast.t)
-  showToast.t = setTimeout(() => (toast.value = ''), 2600)
-}
-
-onMounted(() => window.addEventListener('keydown', onKey))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+import LightBox from './components/LightBox.vue'
+import { games } from './data/games'
 </script>
 
 <template>
-  <NavBar />
+  <HeroSection />
   <main>
-    <HeroSection />
-    <SpotlightSection @open="activeGame = $event" />
-    <GamesSection @open="activeGame = $event" />
-    <WebTeaser @poke="showToast('🔒 This level unlocks soon!')" />
-    <AboutSection />
+    <section id="games" class="games wrap" aria-labelledby="games-heading">
+      <h2 id="games-heading" class="games__heading">Games</h2>
+      <GameEntry v-for="(g, i) in games" :key="g.id" :game="g" :index="i" />
+    </section>
   </main>
-  <GameModal :game="activeGame" @close="activeGame = null" />
-  <ToastMessage :message="toast" />
+  <AboutSection />
+  <LightBox />
 </template>
+
+<style scoped>
+.games {
+  display: grid;
+  gap: 140px;
+  padding-bottom: 160px;
+}
+.games__heading {
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 150;
+  font-variation-settings: 'wdth' 62;
+  color: var(--paper);
+  margin-bottom: -80px;
+}
+@media (max-width: 640px) {
+  .games {
+    gap: 96px;
+    padding-bottom: 100px;
+  }
+  .games__heading {
+    margin-bottom: -56px;
+  }
+}
+</style>

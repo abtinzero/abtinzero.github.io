@@ -1,23 +1,24 @@
+@font-face {
+  font-family: 'DSEG7';
+  src: url('/fonts/DSEG7Classic-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+
 :root {
-  --bg: #0d0b1a;
-  --bg-2: #15122a;
-  --surface: #1c1836;
-  --surface-2: #262046;
-  --border: #342c5e;
-  --text: #f1eeff;
-  --muted: #a49fc4;
-  --pink: #ff4d8d;
-  --yellow: #ffc94d;
-  --mint: #4dffb8;
-  --blue: #4dc3ff;
-  --violet: #7c6cff;
+  /* night sky from the UFO Sightings Simulator key art */
+  --sky: #18235a;
+  --sky-deep: #101842;
+  --paper: #f2eee4;
+  --paper-ink: #2a2a33;
+  --stamp: #ff8a1f;
+  --saucer: #ff7ab6;
+  --text: #dfe3ff;
+  --muted: #9ea7d6;
 
-  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font: 'Archivo', system-ui, sans-serif;
+  --hand: 'Kalam', 'Comic Sans MS', cursive;
 
-  --radius: 14px;
-  --maxw: 1180px;
-  --shadow-pop: 6px 6px 0 0 #000;
+  --maxw: 1160px;
 }
 
 *,
@@ -28,40 +29,30 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  background-color: var(--sky-deep);
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body);
-  font-size: 17px;
+  font-family: var(--font);
+  font-size: 18px;
   line-height: 1.6;
+  font-variation-settings: 'wdth' 100;
+  background: linear-gradient(180deg, var(--sky) 0, var(--sky-deep) 1400px);
+  background-color: var(--sky-deep);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* subtle pixel grid on the whole page */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 32px 32px;
-  z-index: 0;
-}
-
-#app {
-  position: relative;
-  z-index: 1;
+  overflow-x: clip;
 }
 
 a {
-  color: inherit;
+  color: var(--saucer);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 img {
@@ -70,108 +61,49 @@ img {
 }
 
 ::selection {
-  background: var(--pink);
-  color: #000;
+  background: var(--saucer);
+  color: var(--sky-deep);
 }
 
 :focus-visible {
-  outline: 3px solid var(--yellow);
-  outline-offset: 3px;
+  outline: 2px solid var(--saucer);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
-.container {
+.wrap {
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
-.pixel {
-  font-family: var(--font-pixel);
-  letter-spacing: 0.02em;
-}
-
-/* chunky arcade-style button */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-pixel);
-  font-size: 12px;
+/* the paper-colored action button, used sparingly */
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-weight: 600;
+  font-size: 17px;
   text-decoration: none;
-  text-transform: uppercase;
-  padding: 14px 20px;
-  border: 3px solid #000;
-  border-radius: 8px;
-  background: var(--yellow);
-  color: #000;
-  box-shadow: 4px 4px 0 0 #000;
-  cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 8px 18px -8px rgba(4, 8, 30, 0.9);
+  transition: transform 0.12s ease;
 }
-.btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 0 #000;
+.button:hover {
+  transform: translateY(-1px);
 }
-.btn:active {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0 0 #000;
-}
-.btn--ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-  box-shadow: none;
-}
-.btn--ghost:hover {
-  border-color: var(--text);
-  box-shadow: none;
+.button:active {
+  transform: translateY(1px);
 }
 
-.section {
-  padding: 100px 0;
-}
-
-.section-head {
-  margin-bottom: 40px;
-}
-.section-head .eyebrow {
-  font-family: var(--font-pixel);
-  font-size: 11px;
-  color: var(--pink);
-  text-transform: uppercase;
-}
-.section-head h2 {
-  font-size: clamp(32px, 5vw, 52px);
-  line-height: 1.1;
-  margin: 12px 0 10px;
-  letter-spacing: -0.02em;
-}
-.section-head p {
-  color: var(--muted);
-  max-width: 60ch;
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  line-height: 1.05;
   margin: 0;
-}
-
-/* Konami code easter egg: CRT mode */
-body.crt::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.25) 0,
-    rgba(0, 0, 0, 0.25) 1px,
-    transparent 2px,
-    transparent 3px
-  );
-  box-shadow: inset 0 0 160px rgba(0, 0, 0, 0.8);
-}
-body.crt #app {
-  filter: saturate(1.4) contrast(1.1);
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -181,13 +113,16 @@ body.crt #app {
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 70px 0;
+  body {
+    font-size: 17px;
+  }
+  .wrap {
+    padding: 0 18px;
   }
 }
